@@ -55,6 +55,8 @@
                     return instance;
                 }
 
+                editor.setMode('code');
+
                 $scope.$watch('options', function (newValue, oldValue) {
                     for (var k in newValue) {
                         if (newValue.hasOwnProperty(k)) {
@@ -101,7 +103,7 @@
 
                 editor = _createEditor($scope.options);
 
-                if ($scope.options.hasOwnProperty('expanded')) {
+                if ($scope.options && $scope.options.hasOwnProperty('expanded')) {
                     $timeout($scope.options.expanded ? function () {editor.expandAll()} : function () {editor.collapseAll()}, ($scope.options.timeout || 100) + 100);
                 }
 
