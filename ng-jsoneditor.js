@@ -55,8 +55,7 @@
                     return instance;
                 }
 
-                editor.setMode('code');
-
+                var setModeFirstTime = true;
                 $scope.$watch('options', function (newValue, oldValue) {
                     for (var k in newValue) {
                         if (newValue.hasOwnProperty(k)) {
@@ -74,6 +73,10 @@
                                 }
                             }
                         }
+                    }
+                    if(setModeFirstTime) {
+                        editor.setMode('code');
+                        setModeFirstTime = false;
                     }
                 }, true);
 
