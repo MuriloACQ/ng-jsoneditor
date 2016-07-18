@@ -19,6 +19,7 @@
                 }
 
                 function _createEditor(options) {
+                    ngModel.$setViewValue(ngModel.$modelValue);
                     var settings = angular.extend({}, defaults, options);
                     var theOptions = angular.extend({}, settings, {
                         change: function () {
@@ -31,7 +32,7 @@
                                     internalTrigger = true;
                                     var error = undefined;
                                     try {
-                                        ngModel.$setViewValue($scope.preferText === true ? editor.getText() : ngModel.$modelValue || editor.get());
+                                        ngModel.$setViewValue($scope.preferText === true ? editor.getText() : editor.get());
                                     } catch (err) {
                                         error = err;
                                     }
