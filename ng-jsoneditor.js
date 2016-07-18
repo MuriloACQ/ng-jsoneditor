@@ -31,7 +31,7 @@
                                     internalTrigger = true;
                                     var error = undefined;
                                     try {
-                                        ngModel.$setViewValue($scope.preferText === true ? editor.getText() : editor.get());
+                                        ngModel.$setViewValue($scope.preferText === true ? editor.getText() : ngModel.$modelValue || editor.get());
                                     } catch (err) {
                                         error = err;
                                     }
