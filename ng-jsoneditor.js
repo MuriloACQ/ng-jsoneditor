@@ -19,6 +19,7 @@
                 }
 
                 function _createEditor(options) {
+                    var firstLoad = true;
                     var settings = angular.extend({}, defaults, options);
                     var theOptions = angular.extend({}, settings, {
                         change: function () {
@@ -31,7 +32,12 @@
                                     internalTrigger = true;
                                     var error = undefined;
                                     try {
-                                        ngModel.$setViewValue($scope.preferText === true ? editor.getText() : editor.get());
+                                        if(firstLoad) {
+                                            ngModel.$setViewValue(ngModel.$modelValue);
+                                            firstLoad = false;
+                                        } else {
+                                            ngModel.$setViewValue($scope.preferText === true ? editor.getText() : editor.get());
+                                        }
                                     } catch (err) {
                                         error = err;
                                     }
@@ -51,8 +57,6 @@
                     if ($scope.ngJsoneditor instanceof Function) {
                         $timeout(function () { $scope.ngJsoneditor(instance);});
                     }
-
-                    ngModel.$setViewValue(ngModel.$modelValue);
 
                     return instance;
                 }
