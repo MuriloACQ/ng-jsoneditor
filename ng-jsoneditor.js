@@ -19,7 +19,6 @@
                 }
 
                 function _createEditor(options) {
-                    ngModel.$setViewValue(ngModel.$modelValue);
                     var settings = angular.extend({}, defaults, options);
                     var theOptions = angular.extend({}, settings, {
                         change: function () {
@@ -30,7 +29,7 @@
                             debounceTo = $timeout(function () {
                                 if (editor) {
                                     internalTrigger = true;
-                                    var error = undefined; 
+                                    var error = undefined;
                                     try {
                                         ngModel.$setViewValue($scope.preferText === true ? editor.getText() : editor.get());
                                     } catch (err) {
@@ -52,6 +51,8 @@
                     if ($scope.ngJsoneditor instanceof Function) {
                         $timeout(function () { $scope.ngJsoneditor(instance);});
                     }
+
+                    ngModel.$setViewValue(ngModel.$modelValue);
 
                     return instance;
                 }
